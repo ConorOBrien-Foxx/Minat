@@ -1,0 +1,31 @@
+Add := {
+    x := _1;
+    y := _2;
+    x + y
+};
+
+Size :=
+    Ruby_[".size"];
+
+Print :=
+    Ruby_["puts"];
+
+S :=
+    Ruby_[".to_s"];
+
+Fold := {
+    f := _1;
+    a := _2;
+    c := _3;
+    If[Size[a] = 0,
+        c,
+        [
+            h := Ruby_[".shift"][a],
+            Fold[f, a, f[c, h]]
+        ][-1]
+    ]
+};
+
+Sum := {
+    Fold[Add, _1, 0]
+};
